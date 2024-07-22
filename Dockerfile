@@ -5,7 +5,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
    apt-transport-https software-properties-common \
    sudo build-essential gcc-14 g++-14 git wget python3 \
-   python3-pip python-is-python3 tzdata locales clang \
+   pipx python-is-python3 tzdata locales clang \
    gcc-14-aarch64-linux-gnu g++-14-aarch64-linux-gnu \
    binutils-aarch64-linux-gnu qemu-user \
 && apt-get autoremove -y \
@@ -13,17 +13,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/
 
-# Uninstall Debian-installed pip
-RUN DEBIAN_FRONTEND=noninteractive apt-get remove -y python3-pip
-
-# Reinstall pip using get-pip.py
-RUN wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py \
-    && python3 /tmp/get-pip.py \
-    && rm /tmp/get-pip.py
-
 # Secondary installs
-# --break-system-packages: PEP 668
-RUN pip3 install --upgrade --break-system-packages pip cmake ninja
+RUN pipx install cmake ninja
 
 # Locale update:
 RUN locale-gen es_ES.utf8 \
