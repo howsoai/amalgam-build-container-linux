@@ -1,12 +1,12 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
 && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
    apt-transport-https software-properties-common \
-   sudo build-essential gcc-10 g++-10 git wget python3 \
+   sudo build-essential gcc-14 g++-14 git wget python3 \
    python3-pip python-is-python3 tzdata locales clang \
-   gcc-10-aarch64-linux-gnu g++-10-aarch64-linux-gnu \
+   gcc-14-aarch64-linux-gnu g++-14-aarch64-linux-gnu \
    binutils-aarch64-linux-gnu qemu-user \
 && apt-get autoremove -y \
 && apt-get purge -y --auto-remove \
