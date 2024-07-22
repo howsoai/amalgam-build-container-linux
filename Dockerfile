@@ -13,8 +13,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/
 
-# Secondary installs:
-RUN pip3 install --upgrade pip cmake ninja
+# Secondary installs
+# --break-system-packages: PEP 668
+RUN pip3 install --upgrade --break-system-packages pip cmake ninja
 
 # Locale update:
 RUN locale-gen es_ES.utf8 \
