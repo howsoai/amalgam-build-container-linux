@@ -13,6 +13,14 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/
 
+# Uninstall Debian-installed pip
+RUN DEBIAN_FRONTEND=noninteractive apt-get remove -y python3-pip
+
+# Reinstall pip using get-pip.py
+RUN wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py \
+    && python3 /tmp/get-pip.py \
+    && rm /tmp/get-pip.py
+
 # Secondary installs
 # --break-system-packages: PEP 668
 RUN pip3 install --upgrade --break-system-packages pip cmake ninja
