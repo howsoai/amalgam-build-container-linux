@@ -4,9 +4,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
 && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
    apt-transport-https software-properties-common \
-   sudo build-essential gcc-14 g++-14 git wget python3 \
+   sudo build-essential gcc-13 g++-13 git wget python3 \
    pipx python-is-python3 tzdata locales clang \
-   gcc-14-aarch64-linux-gnu g++-14-aarch64-linux-gnu \
+   gcc-13-aarch64-linux-gnu g++-13-aarch64-linux-gnu \
    binutils-aarch64-linux-gnu qemu-user \
 && apt-get autoremove -y \
 && apt-get purge -y --auto-remove \
@@ -21,7 +21,7 @@ RUN locale-gen es_ES.utf8 \
 && update-locale
 
 # Default GCC:
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100 --slave /usr/bin/g++ g++ /usr/bin/g++-14 --slave /usr/bin/gcov gcov /usr/bin/gcov-14 \
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 --slave /usr/bin/g++ g++ /usr/bin/g++-13 --slave /usr/bin/gcov gcov /usr/bin/gcov-13 \
 && update-alternatives --config gcc
 
 RUN gcc --version
