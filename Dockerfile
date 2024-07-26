@@ -24,6 +24,8 @@ RUN locale-gen es_ES.utf8 \
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100 --slave /usr/bin/g++ g++ /usr/bin/g++-14 --slave /usr/bin/gcov gcov /usr/bin/gcov-14 \
 && update-alternatives --config gcc
 
+RUN gcc --version
+
 # WASM compiler:
 RUN mkdir -p /wasm \
 && git clone https://github.com/emscripten-core/emsdk.git /wasm/emsdk \
