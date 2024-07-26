@@ -13,6 +13,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/
 
+RUN apt-cache policy gcc-13
+
 # Secondary installs
 RUN pipx install cmake ninja
 
