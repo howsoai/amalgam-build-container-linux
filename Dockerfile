@@ -32,13 +32,13 @@ RUN gcc --version
 RUN mkdir -p /wasm \
 && git clone https://github.com/emscripten-core/emsdk.git /wasm/emsdk \
 && cd /wasm/emsdk \
-&& ./emsdk install 3.1.32 \
-&& ./emsdk activate 3.1.32
+&& ./emsdk install 3.1.67 \
+&& ./emsdk activate 3.1.67
 ENV PATH="/wasm/emsdk/upstream/emscripten:${PATH}"
 
 # tzdata for WASM:
 RUN cd /wasm \
 && mkdir tzdata && mkdir etc \
-&& wget https://data.iana.org/time-zones/releases/tzdata2023c.tar.gz \
+&& wget https://data.iana.org/time-zones/releases/tzdata2024b.tar.gz \
 && tar -xzf tzdata*.tar.gz -C tzdata \
 && echo "Etc/UTC" > ./etc/timezone
