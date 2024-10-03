@@ -16,8 +16,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 RUN apt-cache policy gcc-13
 
 # Secondary installs
-RUN pipx install cmake ninja
-RUN pipx ensurepath
+RUN apt-get update && apt-get install -y cmake ninja-build
+RUN cmake --version
+RUN ninja --version
 
 # Locale update:
 RUN locale-gen es_ES.utf8 \
