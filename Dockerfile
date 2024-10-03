@@ -17,6 +17,7 @@ RUN apt-cache policy gcc-13
 
 # Secondary installs
 RUN pipx install cmake ninja
+RUN pipx ensurepath
 
 # Locale update:
 RUN locale-gen es_ES.utf8 \
