@@ -4,16 +4,16 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
 && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
    apt-transport-https software-properties-common \
-   sudo build-essential gcc-13 g++-13 git wget python3 \
+   sudo build-essential gcc-12 g++-12 git wget python3 \
    pipx python-is-python3 tzdata locales clang \
-   gcc-13-aarch64-linux-gnu g++-13-aarch64-linux-gnu \
+   gcc-12-aarch64-linux-gnu g++-12-aarch64-linux-gnu \
    binutils-aarch64-linux-gnu qemu-user \
 && apt-get autoremove -y \
 && apt-get purge -y --auto-remove \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/
 
-RUN apt-cache policy gcc-13
+RUN apt-cache policy gcc-12
 
 # Secondary installs
 RUN apt-get update && apt-get install -y cmake ninja-build
@@ -25,7 +25,7 @@ RUN locale-gen es_ES.utf8 \
 && update-locale
 
 # Default GCC:
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 --slave /usr/bin/g++ g++ /usr/bin/g++-13 --slave /usr/bin/gcov gcov /usr/bin/gcov-13 \
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100 --slave /usr/bin/g++ g++ /usr/bin/g++-12 --slave /usr/bin/gcov gcov /usr/bin/gcov-12 \
 && update-alternatives --config gcc
 
 RUN gcc --version
