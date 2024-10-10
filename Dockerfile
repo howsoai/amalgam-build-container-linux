@@ -16,7 +16,14 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 RUN apt-cache policy gcc-10
 
 # Secondary installs
-RUN apt-get update && apt-get install -y cmake ninja-build
+RUN apt-get install -y ca-certificates gpg
+RUN test -f /usr/share/doc/kitware-archive-keyring/copyright || wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
+RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | tee /etc/apt/sources.list.d/kitware.list >/dev/null
+RUN apt-get update
+RUN apt list -a cmake
+RUN apt-get install -y cmake ninja-build
+
+# Print version info
 RUN cmake --version
 RUN ninja --version
 RUN ldd --version
