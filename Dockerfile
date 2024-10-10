@@ -19,6 +19,7 @@ RUN apt-cache policy gcc-10
 RUN apt-get update && apt-get install -y cmake ninja-build
 RUN cmake --version
 RUN ninja --version
+RUN ldd --version
 
 # Locale update:
 RUN locale-gen es_ES.utf8 \
