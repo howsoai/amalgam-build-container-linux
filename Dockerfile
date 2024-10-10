@@ -21,7 +21,7 @@ RUN test -f /usr/share/doc/kitware-archive-keyring/copyright || wget -O - https:
 RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | tee /etc/apt/sources.list.d/kitware.list >/dev/null
 RUN apt-get update
 RUN apt list -a cmake
-RUN apt-get install -y cmake=3.23.2-0kitware1ubuntu20.04.1 ninja-build
+RUN apt-get install -y cmake=3.30.2-0kitware1ubuntu20.04.1 ninja-build
 
 # Print version info
 RUN cmake --version
