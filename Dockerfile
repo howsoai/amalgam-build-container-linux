@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:20.04
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
@@ -19,6 +19,7 @@ RUN apt-cache policy gcc-10
 RUN apt-get update && apt-get install -y cmake ninja-build
 RUN cmake --version
 RUN ninja --version
+RUN ldd --version
 
 # Locale update:
 RUN locale-gen es_ES.utf8 \
