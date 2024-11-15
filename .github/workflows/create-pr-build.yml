@@ -52,6 +52,14 @@ jobs:
     with:
       version: ${{ needs.set-pr-version.outputs.version }}
 
+  build-test-package-228:
+    needs: ['set-pr-version']
+    uses: "./.github/workflows/build-test-package.yml"
+    secrets: inherit
+    with:
+      version: ${{ needs.set-pr-version.outputs.version }}
+      image_name: ${{ github.repository }}-228
+
   # This job is here to have only one final step to add for "Status Checks"
   # in GitHub, instead of adding every leaf test from 'build-test-package'
   final-check:
