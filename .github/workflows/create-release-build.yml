@@ -114,3 +114,12 @@ jobs:
     secrets: inherit
     with:
       version: ${{ needs.construct-release-tag.outputs.release-tag }}
+
+  release-228:
+    needs: ['construct-release-tag']
+    uses: "./.github/workflows/release.yml"
+    secrets: inherit
+    with:
+      version: ${{ needs.construct-release-tag.outputs.release-tag }}
+      image_name: ${{ github.repository }}-228
+      docker_file: "linux-228/Dockerfile"
