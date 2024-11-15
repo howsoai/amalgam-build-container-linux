@@ -56,6 +56,7 @@ jobs:
         with:
           version: ${{ needs.set-branch-version.outputs.version }}
           image_name: ${{ github.repository }}-228
+          docker_file: "linux-228/Dockerfile"
 
   # This job is here to have only one final step to add for "Status Checks"
   # in GitHub, instead of adding every leaf test from 'build-test-package'

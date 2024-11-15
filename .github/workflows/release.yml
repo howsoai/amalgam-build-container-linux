@@ -10,6 +10,10 @@ on:
           required: false
           default: ${{ github.repository }}
           type: string
+      docker_file:
+            required: false
+            default: Dockerfile
+            type: string
 
 defaults:
   run:
@@ -44,6 +48,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
+          file: ${{ inputs.docker_file }}
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ inputs.image_name }}:${{ inputs.version }}
