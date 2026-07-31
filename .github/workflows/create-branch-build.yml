@@ -57,6 +57,8 @@ jobs:
           version: ${{ needs.set-branch-version.outputs.version }}
           image_name: ${{ github.repository }}-228
           docker_file: "linux-228/Dockerfile"
+          # GLIBC 2.28 support is only needed for amd64
+          platforms: "linux/amd64"
 
   # This job is here to have only one final step to add for "Status Checks"
   # in GitHub, instead of adding every leaf test from 'build-test-package'

@@ -11,7 +11,7 @@ RUN dnf update -y \
        glibc glibc-locale-source glibc-langpack-en glibc-langpack-es binutils \
        epel-release \
     && dnf install -y \
-       gcc-toolset-10-gcc gcc-toolset-10-gcc-c++ \
+       gcc-toolset-14-gcc gcc-toolset-14-gcc-c++ \
     && dnf clean all
 
 # Set Timezone to be America/New_York aka Eastern Timezone.
@@ -21,8 +21,8 @@ RUN mkdir -p /etc \
    && sudo ln -snf /usr/share/zoneinfo/America/New_York /etc/localtime \
    && echo $TZ > /etc/timezone
 
-# Set environment for GCC 10
-ENV PATH=/opt/rh/gcc-toolset-10/root/usr/bin:$PATH
+# Set environment for GCC 14
+ENV PATH=/opt/rh/gcc-toolset-14/root/usr/bin:$PATH
 
 # Install cmake and ninja-build
 RUN dnf install -y dnf-plugins-core \
@@ -39,9 +39,9 @@ ENV LANG=es_ES.UTF-8
 RUN localedef -i es_ES -f UTF-8 es_ES.UTF-8
 
 # Default GCC setup
-RUN update-alternatives --install /usr/bin/gcc gcc /opt/rh/gcc-toolset-10/root/usr/bin/gcc 100 \
-    --slave /usr/bin/g++ g++ /opt/rh/gcc-toolset-10/root/usr/bin/g++ \
-    --slave /usr/bin/gcov gcov /opt/rh/gcc-toolset-10/root/usr/bin/gcov \
-    && update-alternatives --set gcc /opt/rh/gcc-toolset-10/root/usr/bin/gcc
+RUN update-alternatives --install /usr/bin/gcc gcc /opt/rh/gcc-toolset-14/root/usr/bin/gcc 100 \
+    --slave /usr/bin/g++ g++ /opt/rh/gcc-toolset-14/root/usr/bin/g++ \
+    --slave /usr/bin/gcov gcov /opt/rh/gcc-toolset-14/root/usr/bin/gcov \
+    && update-alternatives --set gcc /opt/rh/gcc-toolset-14/root/usr/bin/gcc
 
 RUN gcc --version && ldd --version
