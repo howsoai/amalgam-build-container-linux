@@ -15,10 +15,12 @@ RUN dnf update -y \
     && dnf clean all
 
 # Set Timezone to be America/New_York aka Eastern Timezone.
+# Note: no sudo here -- every RUN already executes as root, and sudo's PAM account
+# lookup fails under buildx's docker-container driver.
 RUN mkdir -p /zoneinfo && cp -r /usr/share/zoneinfo/* /zoneinfo
 ENV TZ=America/New_York
 RUN mkdir -p /etc \
-   && sudo ln -snf /usr/share/zoneinfo/America/New_York /etc/localtime \
+   && ln -snf /usr/share/zoneinfo/America/New_York /etc/localtime \
    && echo $TZ > /etc/timezone
 
 # Set environment for GCC 14
