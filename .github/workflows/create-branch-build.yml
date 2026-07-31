@@ -62,8 +62,10 @@ jobs:
 
   # This job is here to have only one final step to add for "Status Checks"
   # in GitHub, instead of adding every leaf test from 'build-test-package'
+  # Note: both image lanes must be listed -- 'needs.*' only spans the jobs named here,
+  # so omitting the 228 lane would let a glibc 2.28 build failure pass the status check.
   final-check:
-    needs: ['build-test-package']
+    needs: ['build-test-package', 'build-test-package-228']
     if: always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled'))
     runs-on: ubuntu-latest
     steps:
