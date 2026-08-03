@@ -30,7 +30,7 @@ jobs:
 
       - name: Get previous git tag
         id: previous-tag
-        uses: WyriHaximus/github-action-get-previous-tag@v1
+        uses: WyriHaximus/github-action-get-previous-tag@v2
         with:
           fallback: 0.0.0
 
@@ -123,4 +123,6 @@ jobs:
       version: ${{ needs.construct-release-tag.outputs.release-tag }}
       image_name: ${{ github.repository }}-228
       docker_file: "linux-228/Dockerfile"
+      # GLIBC 2.28 support is only needed for amd64
+      platforms: "linux/amd64"
       create_release: false
